@@ -2,7 +2,7 @@
  * @ FuzzerType.java
  * 
  */
-package parameterHack;
+package parameterHack.domain;
 
 /**
  * <pre>

@@ -2,13 +2,16 @@
  * @ ParameterHackTest.java
  * 
  */
-package parameterHack;
+package parameterHack.logic;
 
 
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
+
+import parameterHack.domain.Fuzzer;
+import parameterHack.domain.FuzzerType;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -41,9 +44,11 @@ public class ParameterHackTest {
 	public void xssTest(){
 		
 		String src =  "loginFieldVO.companyid.value=security&loginFieldVO.userid.value=admin&loginFieldVO.password.value=pass123%21&dispatchURL=";
-		paramHack.setFuzzer(FuzzerType.XSS);
+		Fuzzer fuzzer = new Fuzzer();
+		fuzzer.setFuzzerType(FuzzerType.XSS);
+		paramHack.setFuzzer(fuzzer);
 		
-		String result = paramHack.makeFuzzerString(src, "", "");
+		String result = paramHack.makeFuzzerString(src);
 		assertThat(result, is("loginFieldVO.companyid.value=\"/><script>alert(1);</script>&loginFieldVO.userid.value=\"/><script>alert(2);</script>&loginFieldVO.password.value=\"/><script>alert(3);</script>&dispatchURL=\"/><script>alert(4);</script>"));
 	}
 	
@@ -52,9 +57,12 @@ public class ParameterHackTest {
 	@Test
 	public void outputTest(){
 		String paramSrc = "loginFieldVO.companyid.value=security&loginFieldVO.userid.value=admin&loginFieldVO.password.value=pass123%21&dispatchURL=";
-		paramHack.setFuzzer(FuzzerType.CSRF); //해보고 싶은 공격 타입 선택
 		
-		String result = paramHack.makeFuzzerString(paramSrc, "/", "");
+		Fuzzer fuzzer = new Fuzzer();
+		fuzzer.setFuzzerType(FuzzerType.CSRF);
+		paramHack.setFuzzer(fuzzer);
+		
+		String result = paramHack.makeFuzzerString(paramSrc);
 		System.out.println(result);
 	}
 }
