@@ -1,8 +1,6 @@
 /**
  * @ ParameterHackTest.java
  * 
- * Copyright 2016 NHN Techorus Corp. All rights Reserved. 
- * NHN Techorus PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 package parameterHack;
 
@@ -25,7 +23,7 @@ import static org.junit.Assert.assertThat;
  * </pre>
  *
  * @brief	: 
- * @author	: 문재웅(jwmoon@nhn-techorus.com)
+ * @author	: 문재웅(mjw8585@gmail.com)
  * @Date	: 2016. 10. 4.
  */
 public class ParameterHackTest {
@@ -53,7 +51,7 @@ public class ParameterHackTest {
 	/* 자유롭게 output 구하고 싶을 때 사용*/ 
 	@Test
 	public void outputTest(){
-		String paramSrc = "";
+		String paramSrc = "loginFieldVO.companyid.value=security&loginFieldVO.userid.value=admin&loginFieldVO.password.value=pass123%21&dispatchURL=";
 		paramHack.setFuzzer(FuzzerType.CSRF); //해보고 싶은 공격 타입 선택
 		
 		String result = paramHack.makeFuzzerString(paramSrc, "/", "");

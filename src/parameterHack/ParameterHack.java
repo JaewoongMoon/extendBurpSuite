@@ -6,9 +6,6 @@ import java.util.List;
 
 /**
  * @ ParameterHack.java
- * 
- * Copyright 2016 NHN Techorus Corp. All rights Reserved. 
- * NHN Techorus PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
 /**
@@ -18,7 +15,7 @@ import java.util.List;
  * </pre>
  *
  * @brief	: 
- * @author	: 문재웅(jwmoon@nhn-techorus.com)
+ * @author	: 문재웅(mjw8585@gmail.com)
  * @Date	: 2016. 9. 16.
  */
 public class ParameterHack {
@@ -62,7 +59,7 @@ public class ParameterHack {
 	/**
 	 * @Method 	: normalType
 	 * @brief	: 모든 파라메터의 값을 value로 세팅한다.
-	 * @author	: 문재웅(jwmoon@nhn-techorus.com)
+	 * @author	: 문재웅(mjw8585@gmail.com)
 	 * @Date	: 2016. 10. 4.
 	 * @param params
 	 * @param value
@@ -82,7 +79,7 @@ public class ParameterHack {
 	/**
 	 * @Method 	: xsasScript
 	 * @brief	: 액션스크립트 XSS 테스트 스크립트를 생성한다.
-	 * @author	: 문재웅(jwmoon@nhn-techorus.com)
+	 * @author	: 문재웅(mjw8585@gmail.com)
 	 * @Date	: 2016. 10. 4.
 	 * @param params
 	 * @return
@@ -103,7 +100,7 @@ public class ParameterHack {
 	/**
 	 * @Method 	: xssScript
 	 * @brief	: XSS 테스트 스크립트를 생성한다.
-	 * @author	: 문재웅(jwmoon@nhn-techorus.com)
+	 * @author	: 문재웅(mjw8585@gmail.com)
 	 * @Date	: 2016. 10. 4.
 	 * @param params
 	 * @return
@@ -127,7 +124,7 @@ public class ParameterHack {
 	/**
 	 * @Method 	: postForm
 	 * @brief	: 파라메터 배열로부터 HTML 폼을 생성한다. 
-	 * @author	: 문재웅(jwmoon@nhn-techorus.com)
+	 * @author	: 문재웅(mjw8585@gmail.com)
 	 * @Date	: 2016. 10. 4.
 	 * @param params : 파라메터 배열
 	 * @param action : 포워딩할 액션 경로
@@ -143,7 +140,7 @@ public class ParameterHack {
 		for(int i=0; i < params.length; i++){
 			String param = params[i];
 			String[] params2 = param.split("=");
-			String newParam = str1 + params2[0] + "=" + str2 + value + str3; 
+			String newParam = str1 + params2[0] + str2 + value + str3; 
 			result = getResult(result, i, "\r\n", newParam);
 		}
 		result += "\r\n</form>";
@@ -154,7 +151,7 @@ public class ParameterHack {
 	/**
 	 * @Method 	: getResult
 	 * @brief	: 
-	 * @author	: 문재웅(jwmoon@nhn-techorus.com)
+	 * @author	: 문재웅(mjw8585@gmail.com)
 	 * @Date	: 2016. 10. 4.
 	 * @param result
 	 * @param idx

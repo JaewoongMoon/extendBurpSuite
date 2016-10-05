@@ -1,8 +1,6 @@
 /**
- * @ FlowLayoutExam.java
+ * @ FuzzerUI.java
  * 
- * Copyright 2016 NHN Techorus Corp. All rights Reserved. 
- * NHN Techorus PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 package parameterHack;
 
@@ -33,7 +31,7 @@ import javax.swing.JScrollPane;
  * </pre>
  *
  * @brief	: 
- * @author	: 문재웅(jwmoon@nhn-techorus.com)
+ * @author	: 문재웅(mjw8585@gmail.com)
  * @Date	: 2016. 10. 4.
  */
 public class FuzzerUI extends JFrame implements ActionListener{
@@ -49,19 +47,17 @@ public class FuzzerUI extends JFrame implements ActionListener{
     JLabel label3;
     JLabel label4;
     JTextField userParamField;
-    /*
-    String str[] = {"--SELECT--", FuzzerType.XSS.toString(),
-    		FuzzerType.XSAS.toString(), FuzzerType.CSRF.toString(),
-    		FuzzerType.SQL_INJECTION.toString(), FuzzerType.NORMAL.toString()};
-    */
-
+    Vector dbmses;
+    JComboBox dbmsBox;
+    
     /** 
      *  생성자 
      */ 
     public FuzzerUI() {
-    	super("Fuzzer 생성기"); // 타이틀
+    	super("Fuzzer String Maker Ver 1.1"); // 타이틀
     	
-    	/* 컴포넌트 세팅 */
+    	/************************************************************************/
+    	/************************  컴포넌트 세팅  *****************************/
     	
     	// fuzzer 콤보 박스
     	fuzzers = new Vector<String>();
@@ -72,7 +68,7 @@ public class FuzzerUI extends JFrame implements ActionListener{
     	fuzzers.add(FuzzerType.CSRF.toString());
     	fuzzers.add(FuzzerType.SQL_INJECTION.toString());
     	
-    	fuzzerBox = new JComboBox(fuzzers);
+    	fuzzerBox = new JComboBox<>(fuzzers);
     	fuzzerBox.addActionListener(this);
     	
     	
@@ -95,18 +91,28 @@ public class FuzzerUI extends JFrame implements ActionListener{
     	// 유저가 입력하는 Param Value
     	userParamField = new JTextField();
     	
+    	dbmses = new Vector<String>();
+    	dbmses.add("--SELECT--");
+    	for(DbmsType dbmsType : DbmsType.values()){
+    		dbmses.add(dbmsType);
+    	}
+    	dbmsBox = new JComboBox<>(dbmses);
     	
-    	/* 전체 view 세팅 */
+    	
+    	
+    	/************************************************************************/
+    	/**********************  컨테이너 view 세팅  **************************/
     	// 레이아웃 세팅
-    	//super.setLayout(new GridLayout(3,2, 10, 10));
     	super.setLayout(null); 
+    	setResizable(false);
     	
     	// 컴포넌트 위치 조정
     	label1.setBounds( 30, 30, 300, 20);
     	inputPane1.setBounds( 30, 60, 500, 200);
     	
     	label2.setBounds( 550, 30, 300, 20);
-    	fuzzerBox.setBounds(550, 60, 200, 20);
+    	fuzzerBox.setBounds(550, 60, 150, 20);
+    	dbmsBox.setBounds(720, 60, 150, 20);
     	
     	label3.setBounds( 30, 300, 300, 20);
     	outputPane.setBounds( 30, 330, 500, 200);
@@ -116,9 +122,11 @@ public class FuzzerUI extends JFrame implements ActionListener{
     	userParamField.setEnabled(false);
     	userParamField.addActionListener(this);
     	
+    	
     	// 컴포넌트 추가 
     	add(label1);
     	add(fuzzerBox);
+    	add(dbmsBox);
     	add(label2);
     	add(inputPane1);
     	add(label3);
@@ -127,7 +135,7 @@ public class FuzzerUI extends JFrame implements ActionListener{
     	add(userParamField);
     	
     	// 크기 지정
-    	setSize(900, 700);
+    	setSize(950, 700);
     	
     	setVisible(true);
     	
