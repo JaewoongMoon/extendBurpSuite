@@ -59,8 +59,7 @@ public class FuzzerUI extends JFrame {
     JMenuBar menuBar;
     JMenu menu1;
     JMenuItem menuItem1;
-    TreeSet<KeyStroke> FORWARD_TRAVERSAL;
-    TreeSet<KeyStroke> BACKWARD_TRAVERSAL;
+
     /** 
      *  생성자 
      */ 
@@ -164,22 +163,6 @@ public class FuzzerUI extends JFrame {
     	userParamField.setVisible(false);
     	
     	triggerBtn.setBounds(550, 220, 130, 40);
-    	
-    	// 포커스 이동 세팅 
-    	/*
-    	FORWARD_TRAVERSAL = new TreeSet<KeyStroke>();
-        BACKWARD_TRAVERSAL = new TreeSet<KeyStroke>();
-        FORWARD_TRAVERSAL.add(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0));
-        BACKWARD_TRAVERSAL.add(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.SHIFT_MASK));
-        input1.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, FORWARD_TRAVERSAL);
-        input1.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, BACKWARD_TRAVERSAL);
-        fuzzerBox.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, FORWARD_TRAVERSAL);
-        fuzzerBox.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, BACKWARD_TRAVERSAL);
-        dbmsBox.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, FORWARD_TRAVERSAL);
-        dbmsBox.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, BACKWARD_TRAVERSAL);
-        output.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, FORWARD_TRAVERSAL);
-        output.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, BACKWARD_TRAVERSAL);
-    	*/
     	
     	// 크기 지정
     	setSize(950, 700);
