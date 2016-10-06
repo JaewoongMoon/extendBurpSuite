@@ -4,26 +4,25 @@
  */
 package parameterHack.ui;
 
-import java.awt.Choice;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.Event;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.activation.ActivationSystem;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.TreeSet;
 import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
+import javax.swing.KeyStroke;
 import parameterHack.domain.DbmsType;
 import parameterHack.domain.Fuzzer;
 import parameterHack.domain.FuzzerType;
@@ -57,15 +56,29 @@ public class FuzzerUI extends JFrame {
     Vector dbmses;
     JComboBox dbmsBox;
     JButton triggerBtn;
-    
+    JMenuBar menuBar;
+    JMenu menu1;
+    JMenuItem menuItem1;
+
     /** 
      *  생성자 
      */ 
     public FuzzerUI() {
     	super("Fuzzer String Maker Ver 1.1"); // 타이틀
     	
+    	
     	/************************************************************************/
     	/************************  컴포넌트 세팅  *****************************/
+    	
+    	
+    	// 메뉴바
+    	menuBar = new JMenuBar();
+    	menu1 = new JMenu("메뉴1");
+    	menuItem1 = new JMenuItem("변환");
+    	menuBar.add(menu1);
+    	menu1.add(menuItem1);
+    	menuItem1.setAccelerator(KeyStroke.getKeyStroke('F', Event.CTRL_MASK));
+    	menuItem1.addActionListener(new ConversionActionHandler());
     	
     	// fuzzer 콤보 박스
     	fuzzers = new Vector<String>();
@@ -107,8 +120,9 @@ public class FuzzerUI extends JFrame {
     	dbmsBox = new JComboBox<>(dbmses);
     	
     	// 변환 버튼
-    	triggerBtn = new JButton("변환");
+    	triggerBtn = new JButton("변환 (Ctrl + F)");
     	triggerBtn.addActionListener(new ConversionActionHandler());
+    	//triggerBtn.
     	
     	/************************************************************************/
     	/**********************  컨테이너 view 세팅  **************************/
@@ -116,7 +130,22 @@ public class FuzzerUI extends JFrame {
     	super.setLayout(null); 
     	setResizable(false);
     	
+    	// 컴포넌트 추가 
+    	add(menuBar);
+    	add(label1);
+    	add(fuzzerBox);
+    	add(dbmsBox);
+    	add(label2);
+    	add(inputPane1);
+    	add(label3);
+    	add(outputPane);
+    	add(label4);
+    	add(userParamField);
+    	add(triggerBtn);
+    	
     	// 컴포넌트 위치 조정
+    	//menuBar.setBounds(0,0,400,20); // 일단 보이지 않게 
+    	
     	label1.setBounds( 30, 30, 300, 20);
     	inputPane1.setBounds( 30, 60, 500, 200);
     	
@@ -133,21 +162,7 @@ public class FuzzerUI extends JFrame {
     	userParamField.setBounds(550, 120, 250, 20);
     	userParamField.setVisible(false);
     	
-    	triggerBtn.setBounds(550, 220, 90, 40);
-    	
-    	
-    	
-    	// 컴포넌트 추가 
-    	add(label1);
-    	add(fuzzerBox);
-    	add(dbmsBox);
-    	add(label2);
-    	add(inputPane1);
-    	add(label3);
-    	add(outputPane);
-    	add(label4);
-    	add(userParamField);
-    	add(triggerBtn);
+    	triggerBtn.setBounds(550, 220, 130, 40);
     	
     	// 크기 지정
     	setSize(950, 700);
@@ -156,8 +171,6 @@ public class FuzzerUI extends JFrame {
     	
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
-   
 
     public static void main(String[] args){
     	new FuzzerUI();
