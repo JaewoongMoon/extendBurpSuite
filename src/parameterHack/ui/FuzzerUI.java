@@ -6,6 +6,9 @@ package parameterHack.ui;
 
 import java.awt.Event;
 import java.awt.KeyboardFocusManager;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -59,12 +62,13 @@ public class FuzzerUI extends JFrame {
     JMenuBar menuBar;
     JMenu menu1;
     JMenuItem menuItem1;
+    JLabel refLabel1;
 
     /** 
      *  생성자 
      */ 
     public FuzzerUI() {
-    	super("Fuzzer String Maker Ver 1.1"); // 타이틀
+    	super("Fuzzer String Maker Ver 1.2"); // 타이틀
     	
     	
     	/************************************************************************/
@@ -106,9 +110,9 @@ public class FuzzerUI extends JFrame {
     	
     	label1 = new JLabel("변환할 파라메터 문자열 (Input Parameter String)");
     	label2 = new JLabel("퍼저 타입 선택 (Fuzzer Type Select)");
-    	label3 = new JLabel("출력 값 (Output)");
+    	label3 = new JLabel("출력 값 (Output) : 자동으로 클립보드에 복사됩니다.");
     	label4 = new JLabel("세팅할 파라메터 값(User Parameter Value)");
-    	
+    	refLabel1 = new JLabel("컴포넌트간 이동은 Ctrl + TAB 으로 가능합니다.");
     	// 유저가 입력하는 Param Value
     	userParamField = new JTextField();
     	
@@ -142,6 +146,7 @@ public class FuzzerUI extends JFrame {
     	add(label4);
     	add(userParamField);
     	add(triggerBtn);
+    	add(refLabel1);
     	
     	// 컴포넌트 위치 조정
     	//menuBar.setBounds(0,0,400,20); // 일단 보이지 않게 
@@ -154,14 +159,14 @@ public class FuzzerUI extends JFrame {
     	dbmsBox.setBounds(720, 60, 150, 20);
     	dbmsBox.setVisible(false);
     	
-    	label3.setBounds( 30, 300, 300, 20);
+    	label3.setBounds( 30, 300, 400, 20);
     	outputPane.setBounds( 30, 330, 500, 200);
     	
     	label4.setBounds(550, 100, 300, 20);
     	label4.setVisible(false);
     	userParamField.setBounds(550, 120, 250, 20);
     	userParamField.setVisible(false);
-    	
+    	refLabel1.setBounds(550, 190, 300, 20);
     	triggerBtn.setBounds(550, 220, 130, 40);
     	
     	// 크기 지정
@@ -230,6 +235,16 @@ public class FuzzerUI extends JFrame {
     		
     		// STEP 4. 결과 값 출력 
     		output.setText(result);
+    		
+    		//클립보드에 복사 
+    		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+    		if(result != null)
+    		{
+    		     StringSelection contents = new StringSelection(result);
+    		     clipboard.setContents(contents, null);
+    		}
+
+
     		
     	}
     }
