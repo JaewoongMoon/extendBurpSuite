@@ -32,6 +32,7 @@ import parameterHack.domain.FuzzerType;
 import parameterHack.logic.ParameterHack;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 /**
  * <pre>
@@ -43,7 +44,7 @@ import javax.swing.JScrollPane;
  * @author	: 문재웅(mjw8585@gmail.com)
  * @Date	: 2016. 10. 4.
  */
-public class FuzzerUI extends JFrame {
+public class FuzzerUI extends JPanel {
 
 	   
    // Choice fuzzerBox = new Choice();
@@ -68,12 +69,9 @@ public class FuzzerUI extends JFrame {
      *  생성자 
      */ 
     public FuzzerUI() {
-    	super("Fuzzer String Maker Ver 1.2"); // 타이틀
-    	
     	
     	/************************************************************************/
     	/************************  컴포넌트 세팅  *****************************/
-    	
     	
     	// 메뉴바
     	menuBar = new JMenuBar();
@@ -132,7 +130,6 @@ public class FuzzerUI extends JFrame {
     	/**********************  컨테이너 view 세팅  **************************/
     	// 레이아웃 세팅
     	super.setLayout(null); 
-    	setResizable(false);
     	
     	// 컴포넌트 추가 
     	add(menuBar);
@@ -171,15 +168,14 @@ public class FuzzerUI extends JFrame {
     	
     	// 크기 지정
     	setSize(950, 700);
-    	
     	setVisible(true);
     	
-    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    /*
     public static void main(String[] args){
     	new FuzzerUI();
-    }
+    }*/
 
     
     /**
